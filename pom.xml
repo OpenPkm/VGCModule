@@ -5,6 +5,8 @@
   <groupId>dev.cequell.openpkm</groupId>
   <artifactId>vgc-module</artifactId>
   <version>1.0.0-SNAPSHOT</version>
+  <name>VGC Module</name>
+  <description>Open Pokémon - VGC Module</description>
   <properties>
     <compiler-plugin.version>3.10.1</compiler-plugin.version>
     <maven.compiler.release>17</maven.compiler.release>

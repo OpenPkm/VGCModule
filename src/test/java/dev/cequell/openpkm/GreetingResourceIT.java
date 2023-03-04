@@ -1,4 +1,4 @@
-package org.acme;
+package dev.cequell.openpkm;
 
 import io.quarkus.test.junit.QuarkusIntegrationTest;
 

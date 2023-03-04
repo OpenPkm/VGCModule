@@ -1,4 +1,4 @@
-package org.acme;
+package dev.cequell.openpkm;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
