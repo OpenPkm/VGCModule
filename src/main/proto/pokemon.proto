@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "dev.cequell.openpkm.vgc_module.proto.pokemon";
+
+service PokemonProtoService {
+  rpc ById(PokemonRequestDto) returns (PokemonResponseDto);
+}
+
+message PokemonRequestDto {
+  string pokemonUuid = 1;
+}
+
+message PokemonResponseDto {
+  string                      pokemonUuid    = 1;
+  uint32                      nationalDexNo  = 2;
+  uint32                      regionalDexNo  = 3;
+  string                      name           = 4;
+  string                      classification = 5;
+  float                       weight         = 6;
+  float                       height         = 7;
+  optional float              femaleRatio    = 8;
+  optional string             variation      = 9;
+  uint32                      gen            = 10;
+  TypeResponseDTO             primaryType    = 11;
+  optional TypeResponseDTO    secondaryType  = 12;
+  optional PokemonResponseDto evolvesFrom    = 13;
+}
+
+message TypeResponseDTO {
+  string typeUuid = 1;
+  string name     = 2;
+  string slug     = 3;
+}

@@ -1,4 +1,4 @@
-package dev.cequell.openpkm;
+package dev.cequell.openpkm.vgc_module;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
