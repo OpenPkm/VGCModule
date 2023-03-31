@@ -54,12 +54,25 @@
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-grpc</artifactId>
     </dependency>
-
-    <!-- https://mvnrepository.com/artifact/io.quarkus/quarkus-maven-plugin -->
     <dependency>
       <groupId>io.quarkus</groupId>
-      <artifactId>quarkus-maven-plugin</artifactId>
-      <version>${quarkus.platform.version}</version>
+      <artifactId>quarkus-hibernate-orm-panache</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-flyway</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-jdbc-postgresql</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-smallrye-graphql</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-smallrye-graphql-client</artifactId>
     </dependency>
 
     <!-- https://mvnrepository.com/artifact/org.mapstruct/mapstruct -->
@@ -85,41 +98,6 @@
       <optional>true</optional>
     </dependency>
 
-    <!-- https://mvnrepository.com/artifact/io.quarkus/quarkus-hibernate-orm-panache -->
-    <dependency>
-      <groupId>io.quarkus</groupId>
-      <artifactId>quarkus-hibernate-orm-panache</artifactId>
-      <version>${quarkus.platform.version}</version>
-    </dependency>
-
-    <!-- https://mvnrepository.com/artifact/io.quarkus/quarkus-flyway -->
-    <dependency>
-      <groupId>io.quarkus</groupId>
-      <artifactId>quarkus-flyway</artifactId>
-      <version>${quarkus.platform.version}</version>
-    </dependency>
-
-    <!-- https://mvnrepository.com/artifact/io.quarkus/quarkus-jdbc-postgresql -->
-    <dependency>
-      <groupId>io.quarkus</groupId>
-      <artifactId>quarkus-jdbc-postgresql</artifactId>
-      <version>${quarkus.platform.version}</version>
-    </dependency>
-
-    <!-- https://mvnrepository.com/artifact/io.quarkus/quarkus-smallrye-graphql -->
-    <dependency>
-      <groupId>io.quarkus</groupId>
-      <artifactId>quarkus-smallrye-graphql</artifactId>
-      <version>${graphql.version}</version>
-    </dependency>
-
-    <!-- https://mvnrepository.com/artifact/io.quarkus/quarkus-smallrye-graphql-client -->
-    <dependency>
-      <groupId>io.quarkus</groupId>
-      <artifactId>quarkus-smallrye-graphql-client</artifactId>
-      <version>${graphql.version}</version>
-    </dependency>
-
     <!-- ############################################################## -->
     <!--                        TEST SCOPE                              -->
     <!-- ############################################################## -->
@@ -131,6 +109,19 @@
     <dependency>
       <groupId>io.rest-assured</groupId>
       <artifactId>rest-assured</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-junit5-mockito</artifactId>
+      <scope>test</scope>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/io.grpc/grpc-testing -->
+    <dependency>
+      <groupId>io.grpc</groupId>
+      <artifactId>grpc-testing</artifactId>
+      <version>1.53.0</version>
       <scope>test</scope>
     </dependency>
 

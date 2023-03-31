@@ -4,9 +4,10 @@ import dev.cequell.openpkm.vgc_module.enums.TypeSlugEnum;
 import dev.cequell.openpkm.vgc_module.maps.PokemonDetailMapper;
 import dev.cequell.openpkm.vgc_module.models.PokemonDetail;
 import dev.cequell.openpkm.vgc_module.models.TypeMultiplier;
+import dev.cequell.openpkm.vgc_module.proto.pokemon.PokemonProtoDto;
 import dev.cequell.openpkm.vgc_module.proto.pokemon.PokemonProtoService;
-import dev.cequell.openpkm.vgc_module.proto.pokemon.PokemonRequestDto;
-import dev.cequell.openpkm.vgc_module.proto.pokemon.PokemonResponseDto;
+import dev.cequell.openpkm.vgc_module.proto.pokemon.PokemonRequestProtoDto;
+import dev.cequell.openpkm.vgc_module.proto.pokemon.PokemonResponseProtoDto;
 import dev.cequell.openpkm.vgc_module.repositories.TypeChartRepository;
 import io.quarkus.grpc.GrpcClient;
 import io.smallrye.common.annotation.Blocking;
@@ -23,11 +24,11 @@ public class PokemonTypeChartService {
     private final PokemonDetailMapper pokemonDetailMapper;
 
     @GrpcClient("pokemon")
-    private PokemonProtoService pokemonProtoService;
+    PokemonProtoService pokemonProtoService;
 
     @Blocking
     public PokemonDetail execute(final UUID pokemonUuid, final UUID genId) {
-        final var pokemon = getPokemon(pokemonUuid);
+        final var pokemon = getPokemon(pokemonUuid).getPokemon(0);
         final var typeList = genTypeList(pokemon);
 
         final var attackingMap = genMapType();
@@ -53,13 +54,15 @@ public class PokemonTypeChartService {
         return pokemonDetailMapper.mapDetails(pokemon, attackingList, defendingList);
     }
 
-    private PokemonResponseDto getPokemon(final UUID pokemonUuid) {
+    private PokemonResponseProtoDto getPokemon(final UUID pokemonUuid) {
         return pokemonProtoService.byId(
-                PokemonRequestDto.newBuilder().setPokemonUuid(pokemonUuid.toString()).build()
+                PokemonRequestProtoDto.newBuilder()
+                        .addPokemonUuid(pokemonUuid.toString())
+                        .build()
         ).await().atMost(Duration.ofSeconds(3));
     }
 
-    private ArrayList<UUID> genTypeList(final PokemonResponseDto pokemon) {
+    private ArrayList<UUID> genTypeList(final PokemonProtoDto pokemon) {
         final var typeList = new ArrayList<UUID>();
 
         final var primaryType = UUID.fromString(pokemon.getPrimaryType().getTypeUuid());

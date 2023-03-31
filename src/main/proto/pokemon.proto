@@ -4,30 +4,34 @@ option java_multiple_files = true;
 option java_package = "dev.cequell.openpkm.vgc_module.proto.pokemon";
 
 service PokemonProtoService {
-  rpc ById(PokemonRequestDto) returns (PokemonResponseDto);
+  rpc ById(PokemonRequestProtoDto) returns (PokemonResponseProtoDto);
 }
 
-message PokemonRequestDto {
-  string pokemonUuid = 1;
+message PokemonRequestProtoDto {
+  repeated string pokemonUuid = 1;
 }
 
-message PokemonResponseDto {
-  string                      pokemonUuid    = 1;
-  uint32                      nationalDexNo  = 2;
-  uint32                      regionalDexNo  = 3;
-  string                      name           = 4;
-  string                      classification = 5;
-  float                       weight         = 6;
-  float                       height         = 7;
-  optional float              femaleRatio    = 8;
-  optional string             variation      = 9;
-  uint32                      gen            = 10;
-  TypeResponseDTO             primaryType    = 11;
-  optional TypeResponseDTO    secondaryType  = 12;
-  optional PokemonResponseDto evolvesFrom    = 13;
+message PokemonResponseProtoDto {
+  repeated PokemonProtoDto pokemon = 1;
 }
 
-message TypeResponseDTO {
+message PokemonProtoDto {
+  string                        pokemonUuid    = 1;
+  uint32                        nationalDexNo  = 2;
+  uint32                        regionalDexNo  = 3;
+  string                        name           = 4;
+  string                        classification = 5;
+  float                         weight         = 6;
+  float                         height         = 7;
+  optional float                femaleRatio    = 8;
+  optional string               variation      = 9;
+  uint32                        gen            = 10;
+  TypeResponseProtoDTO          primaryType    = 11;
+  optional TypeResponseProtoDTO secondaryType  = 12;
+  optional PokemonProtoDto      evolvesFrom    = 13;
+}
+
+message TypeResponseProtoDTO {
   string typeUuid = 1;
   string name     = 2;
   string slug     = 3;
