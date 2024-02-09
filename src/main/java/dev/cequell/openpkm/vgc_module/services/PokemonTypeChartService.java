@@ -11,9 +11,9 @@ import dev.cequell.openpkm.vgc_module.proto.pokemon.PokemonResponseProtoDto;
 import dev.cequell.openpkm.vgc_module.repositories.TypeChartRepository;
 import io.quarkus.grpc.GrpcClient;
 import io.smallrye.common.annotation.Blocking;
+import jakarta.enterprise.context.ApplicationScoped;
 import lombok.RequiredArgsConstructor;
 
-import javax.enterprise.context.ApplicationScoped;
 import java.time.Duration;
 import java.util.*;
 
