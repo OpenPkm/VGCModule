@@ -14,21 +14,15 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Table(name = "type_chart")
+@Table(name = "ability")
 @Entity
-public class TypeChartEntity extends PanacheEntityBase {
+public class AbilityEntity extends PanacheEntityBase {
     @Id
     public UUID id;
 
-    @Column(name = "gen_id")
-    public UUID genId;
+    @Column(name = "name")
+    public String name;
 
-    @Column(name = "attacking")
-    public UUID attackingTypeId;
-
-    @Column(name = "defending")
-    public UUID defendingTypeId;
-
-    @Column(name = "multiplier")
-    public double multiplier;
+    @Column(name = "description")
+    public String description;
 }

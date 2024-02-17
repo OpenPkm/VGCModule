@@ -7,21 +7,25 @@
   <version>1.0.0-SNAPSHOT</version>
   <name>VGC Module</name>
   <description>Open Pokémon - VGC Module</description>
+
   <properties>
-    <compiler-plugin.version>3.10.1</compiler-plugin.version>
+    <compiler-plugin.version>3.11.0</compiler-plugin.version>
     <maven.compiler.release>17</maven.compiler.release>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
     <quarkus.platform.group-id>io.quarkus.platform</quarkus.platform.group-id>
-    <quarkus.platform.version>2.16.3.Final</quarkus.platform.version>
+    <quarkus.platform.version>3.2.1.Final</quarkus.platform.version>
     <skipITs>true</skipITs>
-    <surefire-plugin.version>3.0.0-M7</surefire-plugin.version>
-    <mapstruct.version>1.5.3.Final</mapstruct.version>
-    <lombok.version>1.18.26</lombok.version>
-    <testcontainer.version>1.17.6</testcontainer.version>
+    <surefire-plugin.version>3.1.2</surefire-plugin.version>
+    <mapstruct.version>1.5.5.Final</mapstruct.version>
+    <lombok.version>1.18.28</lombok.version>
+    <testcontainer.version>1.18.3</testcontainer.version>
     <graphql.version>2.16.3.Final</graphql.version>
+    <grpc-testing.version>1.55.1</grpc-testing.version>
+    <jakarta.version>3.1.0</jakarta.version>
   </properties>
+
   <dependencyManagement>
     <dependencies>
       <dependency>
@@ -98,6 +102,19 @@
       <optional>true</optional>
     </dependency>
 
+    <!-- https://mvnrepository.com/artifact/jakarta.persistence/jakarta.persistence-api -->
+    <dependency>
+      <groupId>jakarta.persistence</groupId>
+      <artifactId>jakarta.persistence-api</artifactId>
+      <version>${jakarta.version}</version>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/jakarta.enterprise/jakarta.enterprise.cdi-api -->
+    <dependency>
+      <groupId>jakarta.enterprise</groupId>
+      <artifactId>jakarta.enterprise.cdi-api</artifactId>
+    </dependency>
+
     <!-- ############################################################## -->
     <!--                        TEST SCOPE                              -->
     <!-- ############################################################## -->
@@ -121,7 +138,7 @@
     <dependency>
       <groupId>io.grpc</groupId>
       <artifactId>grpc-testing</artifactId>
-      <version>1.53.0</version>
+      <version>${grpc-testing.version}</version>
       <scope>test</scope>
     </dependency>
 

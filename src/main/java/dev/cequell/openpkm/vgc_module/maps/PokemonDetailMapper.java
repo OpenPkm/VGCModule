@@ -10,7 +10,7 @@ import org.mapstruct.NullValuePropertyMappingStrategy;
 import java.util.List;
 
 @Mapper(
-        componentModel = "cdi",
+        componentModel = "jakarta",
         nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE
 )
 public interface PokemonDetailMapper {
@@ -21,6 +21,7 @@ public interface PokemonDetailMapper {
     @Mapping(target = "secondaryType.label", source = "dto.secondaryType.name")
     @Mapping(target = "attacking", source = "attackingMap")
     @Mapping(target = "defending", source = "defendingMap")
+    @Mapping(target = "abilityList", ignore = true)
     PokemonDetail mapDetails(
             PokemonProtoDto dto,
             List<TypeMultiplier> attackingMap,
