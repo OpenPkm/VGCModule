@@ -1,6 +1,8 @@
 package dev.cequell.openpkm.vgc_module.controllers;
 
 import dev.cequell.openpkm.vgc_module.enums.GenerationEnum;
+import dev.cequell.openpkm.vgc_module.enums.MutiplierModeEnum;
+import dev.cequell.openpkm.vgc_module.enums.TypeChartGenerationEnum;
 import dev.cequell.openpkm.vgc_module.models.PokemonDetail;
 import dev.cequell.openpkm.vgc_module.services.PokemonTypeChartService;
 import io.smallrye.common.annotation.Blocking;
@@ -27,9 +29,11 @@ public class PokemonTypeChartController {
     @Description("Get a pokemon with weakness and resistance details")
     @Blocking
     public Uni<PokemonDetail> getPokemonDetail(
-            @Name("id") final UUID pokemonUuid
+            @Name("id") final UUID pokemonUuid,
+            @Name("generation") final TypeChartGenerationEnum generation,
+            @Name("mode") final MutiplierModeEnum mode
     ) {
-        final var result = pokemonTypeChartService.execute(pokemonUuid, GenerationEnum.Gen_IX.getValue());
+        final var result = pokemonTypeChartService.execute(pokemonUuid, generation, mode);
         return Uni.createFrom().item(result);
     }
 }

@@ -1,10 +1,7 @@
 package dev.cequell.openpkm.vgc_module.entities;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
@@ -20,9 +17,6 @@ public class TypeChartEntity extends PanacheEntityBase {
     @Id
     public UUID id;
 
-    @Column(name = "gen_id")
-    public UUID genId;
-
     @Column(name = "attacking")
     public UUID attackingTypeId;
 
@@ -31,4 +25,12 @@ public class TypeChartEntity extends PanacheEntityBase {
 
     @Column(name = "multiplier")
     public double multiplier;
+
+    @ManyToOne
+    @JoinColumn(
+            name = "type_chart_generation_id",
+            insertable = false,
+            updatable = false
+    )
+    public TypeChartGenerationEntity typeChartGeneration;
 }

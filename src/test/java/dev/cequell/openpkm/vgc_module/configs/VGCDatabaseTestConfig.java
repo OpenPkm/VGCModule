@@ -7,7 +7,7 @@ import org.testcontainers.utility.DockerImageName;
 import java.util.Hashtable;
 import java.util.Map;
 
-public class DatabaseTestConfig implements QuarkusTestResourceLifecycleManager {
+public class VGCDatabaseTestConfig implements QuarkusTestResourceLifecycleManager {
     private PostgreSQLContainer postgreSQLContainer;
 
     @Override

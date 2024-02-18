@@ -1,5 +1,7 @@
 package dev.cequell.openpkm.vgc_module.services;
 
+import dev.cequell.openpkm.vgc_module.enums.MutiplierModeEnum;
+import dev.cequell.openpkm.vgc_module.enums.TypeChartGenerationEnum;
 import dev.cequell.openpkm.vgc_module.enums.TypeSlugEnum;
 import dev.cequell.openpkm.vgc_module.maps.PokemonDetailMapper;
 import dev.cequell.openpkm.vgc_module.models.PokemonDetail;
@@ -10,7 +12,6 @@ import dev.cequell.openpkm.vgc_module.proto.pokemon.PokemonRequestProtoDto;
 import dev.cequell.openpkm.vgc_module.proto.pokemon.PokemonResponseProtoDto;
 import dev.cequell.openpkm.vgc_module.repositories.TypeChartRepository;
 import io.quarkus.grpc.GrpcClient;
-import io.smallrye.common.annotation.Blocking;
 import jakarta.enterprise.context.ApplicationScoped;
 import lombok.RequiredArgsConstructor;
 
@@ -26,8 +27,11 @@ public class PokemonTypeChartService {
     @GrpcClient("pokemon")
     PokemonProtoService pokemonProtoService;
 
-    @Blocking
-    public PokemonDetail execute(final UUID pokemonUuid, final UUID genId) {
+    public PokemonDetail execute(
+            final UUID pokemonUuid,
+            final TypeChartGenerationEnum generationEnum,
+            final MutiplierModeEnum multiplierMode
+    ) {
         final var pokemon = getPokemon(pokemonUuid).getPokemon(0);
         final var typeList = genTypeList(pokemon);
 
@@ -35,7 +39,7 @@ public class PokemonTypeChartService {
         final var defendingMap = genMapType();
 
         typeChartRepository.streamAll()
-                .filter(el -> el.genId.equals(genId))
+                .filter(el -> el.typeChartGeneration.id.equals(generationEnum.getValue()))
                 .toList()
                 .forEach(el -> {
                     if(typeList.contains(el.attackingTypeId)) {
@@ -50,6 +54,11 @@ public class PokemonTypeChartService {
 
         var attackingList = mapWeaknessList(attackingMap);
         var defendingList = mapWeaknessList(defendingMap);
+
+        if(multiplierMode == MutiplierModeEnum.SIMPLIFIED) {
+            attackingList = attackingList.stream().filter(el -> el.getMultiplier() != 1.0).toList();
+            defendingList = defendingList.stream().filter(el -> el.getMultiplier() != 1.0).toList();
+        }
 
         return pokemonDetailMapper.mapDetails(pokemon, attackingList, defendingList);
     }

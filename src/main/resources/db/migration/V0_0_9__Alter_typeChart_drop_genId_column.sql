@@ -1,0 +1,1 @@
+ALTER TABLE public."type_chart" DROP COLUMN gen_id;
